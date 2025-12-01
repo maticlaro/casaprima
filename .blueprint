@@ -1,0 +1,90 @@
+created:
+    - database/factories/CustomerFactory.php
+    - database/factories/TechnicianFactory.php
+    - database/factories/ServiceCategoryFactory.php
+    - database/factories/ServiceFactory.php
+    - database/factories/AppointmentFactory.php
+    - database/factories/TechnicianAvailabilityFactory.php
+    - database/factories/ServiceParameterFactory.php
+    - database/factories/ServiceParameterOptionFactory.php
+    - database/factories/MaintenancePlanFactory.php
+    - database/factories/PlanScheduledServiceFactory.php
+    - database/factories/HomeFactory.php
+    - database/factories/HomeAssetFactory.php
+    - database/factories/AppointmentLogFactory.php
+    - database/factories/ServiceAreaFactory.php
+    - database/factories/AppointmentRatingFactory.php
+    - database/factories/PaymentFactory.php
+    - database/factories/RatingVoteFactory.php
+    - database/factories/NotificationFactory.php
+    - database/factories/WarrantyFactory.php
+    - database/factories/ReferralFactory.php
+    - database/factories/ReferralRewardFactory.php
+    - database/migrations/2025_08_06_211243_create_customers_table.php
+    - database/migrations/2025_08_06_211244_create_technicians_table.php
+    - database/migrations/2025_08_06_211245_create_service_categories_table.php
+    - database/migrations/2025_08_06_211246_create_services_table.php
+    - database/migrations/2025_08_06_211247_create_appointments_table.php
+    - database/migrations/2025_08_06_211248_create_technician_availabilities_table.php
+    - database/migrations/2025_08_06_211249_create_service_parameters_table.php
+    - database/migrations/2025_08_06_211250_create_service_parameter_options_table.php
+    - database/migrations/2025_08_06_211251_create_maintenance_plans_table.php
+    - database/migrations/2025_08_06_211252_create_plan_scheduled_services_table.php
+    - database/migrations/2025_08_06_211253_create_homes_table.php
+    - database/migrations/2025_08_06_211254_create_home_assets_table.php
+    - database/migrations/2025_08_06_211255_create_appointment_logs_table.php
+    - database/migrations/2025_08_06_211256_create_service_areas_table.php
+    - database/migrations/2025_08_06_211257_create_appointment_ratings_table.php
+    - database/migrations/2025_08_06_211258_create_payments_table.php
+    - database/migrations/2025_08_06_211259_create_rating_votes_table.php
+    - database/migrations/2025_08_06_211300_create_notifications_table.php
+    - database/migrations/2025_08_06_211301_create_warranties_table.php
+    - database/migrations/2025_08_06_211302_create_referrals_table.php
+    - database/migrations/2025_08_06_211303_create_referral_rewards_table.php
+    - database/migrations/2025_08_06_211304_create_service_technician_table.php
+    - database/migrations/2025_08_06_211305_create_appointment_service_parameter_option_table.php
+    - app/Models/Customer.php
+    - app/Models/Technician.php
+    - app/Models/ServiceCategory.php
+    - app/Models/Service.php
+    - app/Models/Appointment.php
+    - app/Models/TechnicianAvailability.php
+    - app/Models/ServiceParameter.php
+    - app/Models/ServiceParameterOption.php
+    - app/Models/MaintenancePlan.php
+    - app/Models/PlanScheduledService.php
+    - app/Models/Home.php
+    - app/Models/HomeAsset.php
+    - app/Models/AppointmentLog.php
+    - app/Models/ServiceArea.php
+    - app/Models/AppointmentRating.php
+    - app/Models/Payment.php
+    - app/Models/RatingVote.php
+    - app/Models/Notification.php
+    - app/Models/Warranty.php
+    - app/Models/Referral.php
+    - app/Models/ReferralReward.php
+models:
+    ParameterOption: {  }
+    User: { name: string, email: string, email_verified_at: 'datetime nullable', password: string, remember_token: 'string nullable', role: "string default:'customer'" }
+    Customer: { user_id: 'id foreign', first_name: string, last_name: string, rut: 'string unique', phone_number: 'string nullable', notification_preferences: 'json nullable', preferred_contact_method: string, authorized_representative: 'string nullable', billing_data: 'json nullable', relationships: { belongsTo: User, hasMany: 'Home, Appointment, MaintenancePlan' } }
+    Technician: { user_id: 'id foreign', first_name: string, last_name: string, rut: 'string unique', phone_number: 'string nullable', is_active: 'boolean  default:true', picture_url: 'string nullable', description: 'text nullable', relationships: { belongsTo: User, hasMany: 'Appointment, TechnicianAvailability, AppointmentLog', belongsToMany: Service } }
+    ServiceCategory: { name: 'string unique', description: 'text nullable', icon: 'string nullable', slug: 'string unique', is_active: 'boolean  default:true', sort_order: 'integer  default:0', meta_title: 'string nullable', meta_description: 'string nullable', meta_keywords: 'string nullable', og_title: 'string nullable', og_description: 'string nullable', og_image: 'string nullable', relationships: { hasMany: Service } }
+    Service: { service_category_id: 'id foreign', name: 'string unique', short_description: text, long_description: 'text nullable', icon: 'string nullable', base_price: 'decimal:10,2', base_duration_minutes: integer, is_emergency_available: 'boolean default:false', emergency_surcharge: 'decimal:10,2 nullable', slug: 'string unique', is_active: 'boolean  default:true', sort_order: 'integer  default:0', travel_fee_per_km: 'decimal:10,2 nullable', requires_site_inspection: 'boolean default:false', satisfaction_survey_template: 'json nullable', meta_title: 'string nullable', meta_description: 'string nullable', meta_keywords: 'string nullable', og_title: 'string nullable', og_description: 'string nullable', og_image: 'string nullable', schema_markup: 'json nullable', protocol_url: 'string nullable', relationships: { belongsTo: ServiceCategory, hasMany: 'Appointment, ServiceParameter, PlanScheduledService, ServiceArea', belongsToMany: Technician } }
+    Appointment: { customer_id: 'id foreign', service_id: 'id foreign', technician_id: 'id foreign', plan_scheduled_service_id: 'id foreign nullable', home_id: 'id foreign', home_asset_id: 'id foreign nullable', scheduled_start_datetime: datetime, calculated_end_datetime: datetime, final_price: 'decimal:10,2', tax_amount: 'decimal:10,2', is_emergency: 'boolean default:false', status: string, notes_for_technician: 'text nullable', customer_notes: 'text nullable', cancellation_reason: 'text nullable', payment_method: 'string nullable', payment_status: string, is_rated: 'boolean default:false', relationships: { belongsTo: 'Customer, Service, Technician, PlanScheduledService, Home, HomeAsset', hasMany: AppointmentLog, hasOne: AppointmentRating, belongsToMany: ServiceParameterOption } }
+    TechnicianAvailability: { technician_id: 'id foreign', start_datetime: datetime, end_datetime: datetime, relationships: { belongsTo: Technician } }
+    ServiceParameter: { service_id: 'id foreign', name: string, description: 'string nullable', relationships: { belongsTo: Service, hasMany: ServiceParameterOption } }
+    ServiceParameterOption: { service_parameter_id: 'id foreign', option_value: string, price_adjustment: 'decimal:10,2  default:0', duration_minutes_adjustment: 'integer  default:0', measurement_unit: 'string nullable', relationships: { belongsTo: ServiceParameter, belongsToMany: Appointment } }
+    MaintenancePlan: { customer_id: 'id foreign', year: year, status: string, relationships: { belongsTo: Customer, hasMany: PlanScheduledService } }
+    PlanScheduledService: { maintenance_plan_id: 'id foreign', service_id: 'id foreign', recommended_month: integer, status: "string default:'pending'", notes: 'text nullable', relationships: { belongsTo: 'MaintenancePlan, Service', hasOne: Appointment } }
+    Home: { customer_id: 'id foreign', name: string, address: text, region: string, comuna: string, postal_code: 'string nullable', square_meters: 'integer nullable', condominium_name: 'string nullable', geo_location: 'json nullable', is_primary: 'boolean default:false', access_instructions: 'text nullable', security_instructions: 'text nullable', relationships: { belongsTo: Customer, hasMany: 'HomeAsset, Appointment' } }
+    HomeAsset: { home_id: 'id foreign', name: string, asset_type: string, brand: 'string nullable', model: 'string nullable', serial_number: 'string nullable', installation_date: 'date nullable', notes: 'text nullable', relationships: { belongsTo: Home, hasMany: Appointment } }
+    AppointmentLog: { appointment_id: 'id foreign', technician_id: 'id foreign', log_type: 'enum:text_note,before_photo,after_photo,document', content_url: 'string nullable', notes: 'text nullable', relationships: { belongsTo: 'Appointment, Technician' } }
+    ServiceArea: { service_id: 'id foreign', region: string, comuna: string, is_available: 'boolean  default:true', min_price: 'decimal:10,2 nullable', travel_fee: 'decimal:10,2 nullable', minimum_notice_hours: 'integer nullable', relationships: { belongsTo: Service } }
+    AppointmentRating: { appointment_id: 'id foreign', work_quality_rating: integer, punctuality_rating: integer, communication_rating: integer, cleanliness_rating: integer, value_rating: integer, overall_rating: integer, public_review: 'text nullable', private_feedback: 'text nullable', is_public: 'boolean  default:true', helpful_votes_count: 'integer  default:0', rating_reminder_sent_at: 'timestamp nullable', custom_responses: 'json nullable', relationships: { belongsTo: Appointment, hasMany: RatingVote } }
+    Payment: { appointment_id: 'id foreign nullable', maintenance_plan_id: 'id foreign nullable', amount: 'decimal:10,2', status: 'enum:pending,completed,failed,refunded', payment_method: 'enum:webpay,webpay_plus,webpay_oneclick,khipu,mach,mercadopago,bank_transfer,cash,check,debit_card,credit_card,pat', payment_platform: 'enum:transbank,khipu,mercadopago,manual nullable', webpay_token: 'string nullable', webpay_session_id: 'string nullable', webpay_transaction_id: 'string nullable', webpay_card_type: 'string nullable', webpay_card_number: 'string nullable', webpay_auth_code: 'string nullable', webpay_response_code: 'string nullable', khipu_payment_id: 'string nullable', khipu_transfer_id: 'string nullable', khipu_bank_id: 'string nullable', khipu_bank_name: 'string nullable', bank_name: 'string nullable', bank_account_type: 'string nullable', bank_account_number: 'string nullable', bank_transfer_date: 'date nullable', bank_transfer_number: 'string nullable', pat_subscription_id: 'string nullable', pat_authorization_code: 'string nullable', pat_last_four: 'string nullable', mach_transaction_id: 'string nullable', document_type: 'string nullable', document_number: 'string nullable', tax_id: 'string nullable', business_name: 'string nullable', business_activity: 'string nullable', business_address: 'string nullable', notes: 'text nullable', paid_at: 'timestamp nullable', refunded_at: 'timestamp nullable', refund_reason: 'text nullable', internal_reference: 'string nullable', relationships: { belongsTo: 'Appointment, MaintenancePlan' } }
+    RatingVote: { rating_id: 'id foreign', customer_id: 'id foreign', is_helpful: boolean, relationships: { belongsTo: 'AppointmentRating, Customer' } }
+    Notification: { user_id: 'id foreign', title: string, content: text, type: 'enum:appointment_reminder,maintenance_due,payment_reminder,rating_reminder,warranty_expiring,referral_earned', read_at: 'timestamp nullable', scheduled_at: 'timestamp nullable', sent_at: 'timestamp nullable', data: 'json nullable', relationships: { belongsTo: User } }
+    Warranty: { service_id: 'id foreign', appointment_id: 'id foreign', duration_months: integer, starts_at: timestamp, expires_at: timestamp, terms: 'text nullable', status: string, void_reason: 'text nullable', notification_sent: 'boolean default:false', relationships: { belongsTo: 'Service, Appointment' } }
+    Referral: { referrer_id: 'id foreign:customers', referred_id: 'id foreign nullable:customers', code: 'string unique', status: 'enum:active,used,expired', discount_amount: 'decimal:10,2', discount_type: string, expires_at: 'timestamp nullable', used_at: 'timestamp nullable', relationships: { belongsTo: Customer, hasMany: ReferralReward } }
+    ReferralReward: { referral_id: 'id foreign', beneficiary_id: 'id foreign:customers', amount: 'decimal:10,2', status: "string default:'pending'", appointment_id: 'id foreign nullable', paid_at: 'timestamp nullable', relationships: { belongsTo: 'Referral, Customer, Appointment' } }
