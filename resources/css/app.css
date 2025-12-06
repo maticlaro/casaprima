@@ -1,10 +1,7 @@
-@import url('[https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Playfair+Display:wght@700&display=swap](https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Playfair+Display:wght@700&display=swap)');
 @import 'tailwindcss';
 @import '../../vendor/livewire/flux/dist/flux.css';
 @import '../../vendor/filament/forms/resources/css/index.css';
 @import '../../vendor/filament/support/resources/css/index.css';
-
-
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
@@ -15,84 +12,230 @@
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../vendor/livewire/flux-pro/stubs/**/*.blade.php';
 @source '../../vendor/livewire/flux/stubs/**/*.blade.php';
-
-@theme {
-    --casaprima-bronze: #B28A5B;
-    --casaprima-cream: #FAF8F5;
-    --casaprima-graphite: #333333;
-    --casaprima-midnight: #1C2B4B;
-
-    /* Font family variables */
-    --font-sans: 'Inter';
-    --font-serif: 'Playfair Display';
-}
-
+/*GLOBAL*/
 body {
-    background-color: var(--casaprima-cream);
-    font-family: var(--font-sans), system-ui, sans-serif;
-    color: var(--casaprima-graphite);
+    font-family: "Roboto", sans-serif;
     margin: 0;
     padding: 0;
 }
-/* @custom-variant dark (&:where(.dark, .dark *)); */
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Quicksand", sans-serif;
+}
+header {
+    margin: 0;
+}
+.btn-agenda {
+    background-color: #F2A30F;
+    font-family: "Quicksand", sans-serif;
+    font-size: 1.25em;
+    color: #0D0D0D;
+    padding: 15px 35px;
+    border-radius: 30px;
+    font-weight: 500;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 18px;
+    transition: background-color 0.3s ease;
+}
+.btn-crear-cuenta {
+    background-color: white;
+    font-family: "Quicksand", sans-serif;
+    font-size: 1.25em;
+    color: #0D0D0D;
+    padding: 15px 35px;
+    border-radius: 30px;
+    font-weight: 500;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 18px;
+    transition: background-color 0.3s ease;
+}
+.heading-section {
+    font-family: "Quicksand", sans-serif;
+    font-weight: 300;
+    background-color: #F2A30F;
+    font-size: 2em;
+    padding: 1em 0;  
+    margin: 0 0 1em;  
+    text-align: center;
+}
+/*GLOBAL*/
 
-
-
-/* @theme {
-    
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-
-    --color-zinc-50: #fafafa;
-    --color-zinc-100: #f5f5f5;
-    --color-zinc-200: #e5e5e5;
-    --color-zinc-300: #d4d4d4;
-    --color-zinc-400: #a3a3a3;
-    --color-zinc-500: #737373;
-    --color-zinc-600: #525252;
-    --color-zinc-700: #404040;
-    --color-zinc-800: #262626;
-    --color-zinc-900: #171717;
-    --color-zinc-950: #0a0a0a;
-
-    --color-accent: var(--color-neutral-800);
-    --color-accent-content: var(--color-neutral-800);
-    --color-accent-foreground: var(--color-white);
-} */
-
-/* @layer theme {
-    .dark {
-        --color-accent: var(--color-white);
-        --color-accent-content: var(--color-white);
-        --color-accent-foreground: var(--color-neutral-800);
-    }
+/*HEADER*/
+header .header-top {
+    background-color: #1b1b1b;    
+    padding: .5em;
+}
+header .header-top .header-top__left {
+    color: white;    
+    display: flex;
+}
+header .header-top ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+      
+}
+header .header-top ul.header-top__left--socials {
+    margin-right: 45px;
+}
+header .header-top ul.header-top__left--phone li a span {
+    color: white;
+}
+header .header-top .header-top__right ul li {
+    margin: 0 2em 0 0;
+}
+header .header-top .header-top__right ul li:first-child {
+    padding: 0 2em 0 0;
+    border-right: solid thin white;
+}
+header .header-top ul li {
+    margin-right: 23px;
+}
+header .header-top ul li a {
+    text-decoration: none;    
+    display: flex;
+}
+header .middle-header {
+    padding: 2.5em 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-@layer base {
-
-    *,
-    ::after,
-    ::before,
-    ::backdrop,
-    ::file-selector-button {
-        border-color: var(--color-gray-200, currentColor);
-    }
-} */
-
-/* [data-flux-field]:not(ui-radio, ui-checkbox) {
-    @apply grid gap-2;
+header .middle-header .search-form {
+    width: 40%; 
+    height: 40px;  
+    position: relative;  
 }
 
-[data-flux-label] {
-    @apply  !mb-0 !leading-tight;
+header .middle-header .search-form button {
+    position: absolute;
+    top: 5px;
+    right: 145px;
+    padding: .5em;
+    border-radius: 50% 50%;
+    background-color: #005C22;
+    cursor: pointer;
+}
+header .middle-header .search-form button:hover {
+    transform: scale(.85);
+}
+header .middle-header .search-form input[type="text"] {
+    width: 100%;
+    max-width: 480px;
+    background-color: rgba(238, 238, 238, .9);
+    border: solid thin #ccc;
+    padding: 10px 15px;
+    border-radius: 25px;    
+    font-size: 1em;
 }
 
-input:focus[data-flux-control],
-textarea:focus[data-flux-control],
-select:focus[data-flux-control] {
-    @apply outline-hidden ring-2 ring-accent ring-offset-2 ring-offset-accent-foreground;
-} */
+header .bottom-nav {
+    background-color: #1b1b1b;
+    padding: 1em 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+}
+header .bottom-nav nav a {
+    font-family: "Quicksand", sans-serif;
+    font-weight: 300;
+    color: white;
+    text-decoration: none;
+    margin: 0 2.5em;    
+    font-size: 1.25em;
+}
+/*HEADER*/
+.hero-content {
+    padding: 0 0 0 10%;
+}
+.hero-content h1 {
+    font-size: 3em;
+    font-weight: 300;            
+}
+.hero-content h2 {
+    font-size: 1.5em;
+    font-weight: 300;
+    margin-bottom: 1.5em;
+    max-width: 700px;
+    justify-content: flex-start;
+}
+.hero-content .btn-agenda {
+    max-width: 300px;
+}
 
-/* \[:where(&)\]:size-4 {
-    @apply size-4;
-} */
+.step-by-step .row {
+    display: flex;
+    flex-direction: row;            
+    width: 100%;
+    min-width: 100%;
+}
+.step-by-step .row .col {
+    width: 50%;
+}
+.step-by-step .row .col img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+.step-by-step .row .col.col--green {
+    background-color: #005C22;
+}
+.step-by-step .row .col.col--green img {
+    width: auto;
+}
 
+footer {
+    padding: 2em 0 0; 
+}
+footer .social-links {
+    display: flex;
+    gap: 1em;
+    margin: 1em 0;
+}
+footer .center-message {
+    max-width: 600px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+footer .center-message--buttons {
+    display: flex;
+    gap: 1em;
+    margin-top: 3em;
+    justify-content: center;
+}
+footer .nav-footer {
+    width: 350px;    
+}
+footer .nav-footer nav{
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    text-align: right;
+    position: relative;
+}
+footer .nav-footer nav::before{
+    content: '';
+    display: block;
+    width: 120px;
+    height: 2px;
+    margin: 0 0 1em 0;
+    background-color: #F2A30F;
+    position: absolute;
+    top: -5px;
+    right: 10px;
+}
+footer .nav-footer nav a {
+    font-family: "Quicksand", sans-serif;
+    font-weight: 300;
+    padding: 0 0 .5em 0;
+}
+footer .bottom-footer {
+    background-color: #F2A30F;
+    padding: 1em 0;
+    font-size: .85em;
+}

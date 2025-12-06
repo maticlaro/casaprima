@@ -1,24 +1,35 @@
-<section class="w-full py-12 lg:py-20 bg-[#FAF8F5] flex flex-col items-center" id="value-prop">
-    <div class="max-w-4xl mx-auto text-center px-4">
-        <h2 class="text-3xl md:text-4xl font-bold text-[#1b1b18] mb-6" style="font-family: 'Playfair Display', serif;">
-            ¿Por qué elegir CASAPRIMA?
-        </h2>
-        <p class="text-lg md:text-xl text-[#706f6c] mb-10 font-sans">
-            Un servicio premium, pensado para dueños exigentes que valoran la tranquilidad, la transparencia y el cuidado profesional de su hogar.
-        </p>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <x-home.value-card 
-                icon='xx'
-                title="Gestión Total" 
-                description="Desde el agendamiento hasta el pago y la garantía, todo en un solo lugar." />
-            <x-home.value-card 
-                icon='xx' 
-                title="Profesionales de Confianza" 
-                description="Solo técnicos certificados y evaluados por clientes reales." />
-            <x-home.value-card 
-                icon='xx' 
-                title="Garantía y Transparencia" 
-                description="Precios claros, seguimiento en tiempo real y garantía de satisfacción." />
+<section class="w-full id="value-prop">
+    <div class="heading-section">
+        <h2>¿Cómo funciona?</h2>    
+    </div>
+    <div class="container mx-auto step-by-step">
+        <div class="row">
+            <div class="col col--green"> 
+               <div class="col--content">
+                    <div class="content--title">
+                        <h3>Agenda tu servicio</h3>
+                        <p>Selecciona el servicio, fecha y hora que más te acomode.</p>
+                    </div>
+                    <div class="content--box">
+                        <p><span><img src="{{ asset('images/icon-check.png') }}" alt="Agenda tu servicio"></span>Agendamiento auto-atendido online.</p>
+                    </div>
+               </div>                 
+            </div>
+            <div class="col">
+                <img src="{{ asset('images/step-1.jpg') }}" alt="Agenda tu servicio">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-green">
+                <img src="{{ asset('images/step-2.jpg') }}" alt="Instagram Casaprima">
+            </div>
+            <div class="col"></div>
+        </div>
+        <div class="row">
+            <div class="col col-green"></div>
+            <div class="col">
+                <img src="{{ asset('images/step-3.jpg') }}" alt="Instagram Casaprima">
+            </div>
         </div>
     </div>
 </section>
